@@ -31,7 +31,7 @@ class web_scraper():
     #will be run for both bot instances
     def __init__(self):
         #tells Python where to look for the chrome web driver
-        PATH = "/Users/daggerpov/Documents/GitHub/Web-Scraper/chromedriver"
+        PATH = "/Users/daggerpov/Documents/GitHub/Insta-Weather-Scraper/chromedriver"
         self.driver = webdriver.Chrome(PATH)
         
     #enters in the credentials and navigates through to the homepage of instagram
