@@ -17,17 +17,6 @@ WIDTH = 1366
 
 
 class web_scraper():
-    """links = []
-
-    comments = [
-        'So cool!', 'Wow!', 'Awesome!'
-    ]
-
-    accounts = [
-        'google', 'twitter', 'googledevs', 'instagram'
-    ]
-    """
-    
     #will be run for both bot instances
     def __init__(self):
         #tells Python where to look for the chrome web driver
@@ -99,19 +88,6 @@ class web_scraper():
         
         sleep(self.random_number_generator(3, 5))
         self.driver.quit()
-
-    '''def unfollow_user(self, user):
-        try:
-            self.nav_user(user, False)
-            sleep(self.random_number_generator(3, 5))
-            following_btn = self.driver.find_elements_by_xpath("//button[contains(text(), 'Following')]")[0]
-            following_btn.click()
-            sleep(self.random_number_generator(2, 4))
-            unfollow_btn = self.driver.find_elements_by_xpath("//button[contains(text(), 'Unfollow')]")[0]
-            unfollow_btn.click()
-        except:
-            pass'''
-
 
     def get_weather(self, city):
         try:
@@ -234,23 +210,12 @@ def instagram_bot(operation, hashtag, user, username_entry_text, password_entry_
     username = str(username_entry_text)
     password = str(password_entry_text)
     instagram_bot.instagram_login(username, password)
-
-    #if operation == 'get_unfollowers':
-    #    instagram_bot.get_unfollowers(username)
-    #elif operation == 'comment_on_account':
-    #    instagram_bot.comment_on_account()
-    #elif operation == 'like_comment_by_hashtag':
-    #    instagram_bot.like_comment_by_hashtag(hashtag)
+    
     if operation == 'nav_user':
         instagram_bot.nav_user(user)
     elif operation == 'follow_user':
         instagram_bot.follow_user(user)
-    #elif operation == 'unfollow_user':
-    #    instagram_bot.unfollow_user(user)
-
-
-
-
+        
 def main():
     #initializing module
     root = tk.Tk()
@@ -557,15 +522,6 @@ class instagram_screen():
         self.follow_pic_button = tk.Button(self.user_frame, image=self.follow_pic, 
         command=lambda: instagram_bot('follow_user', '', str(user.get()), username_entry.get(), password_entry.get()))
         self.follow_pic_button.place(relwidth=0.1, relheight=1, relx=0.9)
-
-        '''self.unfollow_pic = tk.PhotoImage(file='./images/unfollow_pic.png')
-        self.unfollow_pic_label = tk.Label(self.user_frame, image=self.unfollow_pic)
-        self.unfollow_pic_label.place(relwidth=0.1, relheight=1, relx=0.9)
-
-        self.unfollow_pic_button = tk.Button(self.user_frame, image=self.unfollow_pic, 
-        command=lambda: instagram_bot('unfollow_user', '', str(user.get()), username_entry.get(), password_entry.get()))
-        self.unfollow_pic_button.place(relwidth=0.1, relheight=1, relx=0.9)
-        '''
 
 if __name__ == '__main__':
     main()
