@@ -131,3 +131,4 @@ chromedriver_mac64.zip
 .DS_Store
 chromedriver
 .vscode/settings.json
+secrets.py

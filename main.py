@@ -1,3 +1,4 @@
+from secrets import weather_api_key
 from selenium import webdriver
 import tkinter as tk 
 from time import sleep 
@@ -20,7 +21,11 @@ class web_scraper():
     #will be run for both bot instances
     def __init__(self):
         #tells Python where to look for the chrome web driver
-        PATH = "/Users/daggerpov/Documents/GitHub/Insta-Weather-Scraper/chromedriver"
+        if platform == "win32":
+            PATH = r"C:\Users\dansl\Documents\GitHub\Insta-Weather-Scraper\chromedriver.exe"
+        else:
+            PATH = "/Users/daggerpov/Documents/GitHub/Insta-Weather-Scraper/chromedriver"
+
         self.driver = webdriver.Chrome(PATH)
         
     #enters in the credentials and navigates through to the homepage of instagram
@@ -95,7 +100,7 @@ class web_scraper():
             
             #this is my own weather key that I got from signing up for free
             #to this weather api
-            weather_key = '91cdb307c9f5815eb1149aeb01834886'
+            weather_key = weather_api_key
 
             url = 'https://api.openweathermap.org/data/2.5/weather'
             
@@ -249,15 +254,15 @@ class start_menu_screen():
 
 
         #changing font size of title depending on OS and changing window icon
-        if platform == "linux" or platform == "linux2":
+        if platform == "linux" or platform == "linux2" or "win32":
             #linux
             size = 32
             img = tk.PhotoImage(file='./images/scraper.png')
             self.master.tk.call('wm', 'iconphoto', self.master._w, img)
-        elif platform == "win32":
-            #windows
-            size = 32
-            self.master.iconphoto(True, tk.PhotoImage(file="./images/scraper.ico"))
+        # elif platform == "win32":
+        #     #windows
+        #     size = 32
+        #     self.master.iconphoto(True, tk.PhotoImage(file="./images/scraper.ico"))   
         elif platform == "darwin":
             #macOS
             size = 44
