@@ -54,16 +54,19 @@ class web_scraper():
         sleep(4)
         
         
-        not_now_button_1 = self.driver.find_element_by_xpath(
-            "//button[contains(text(), 'Not Now')]")
-        not_now_button_1.click()
-        sleep(2)
+        # not_now_button_1 = self.driver.find_element_by_xpath(
+        #     "//button[contains(text(), 'Not Now')]")
+        # not_now_button_1.click()
+        # sleep(2)
         
-        
-        not_now_button_2 = self.driver.find_element_by_xpath(
-            "//button[contains(text(), 'Not Now')]")
-        not_now_button_2.click()
-        sleep(2)
+        # not_now_button_2 = self.driver.find_element_by_xpath("/html/body/div[1]/div/div[1]/div/div[2]/div/div/div[1]/div/div[2]/div/div/div/div/div/div/div/div[3]/button[2]")
+        # not_now_button_2.click()
+        # sleep(2)
+
+        # not_now_button_2 = self.driver.find_element_by_xpath(
+        #     "//button[contains(text(), 'Not Now')]")
+        # not_now_button_2.click()
+        # sleep(2)
         
 
     #randomizing sleep times to avoid being detected as a bot
@@ -72,7 +75,7 @@ class web_scraper():
         return random_number
 
     def nav_user(self, user, nav_without_follow=True):
-        sleep(self.random_number_generator(2, 6))
+        sleep(self.random_number_generator(4, 6))
         self.driver.get('https://instagram.com/' + user)
         
         #will quit the driver if all the operation does is navigate
@@ -86,7 +89,7 @@ class web_scraper():
         self.nav_user(user, False)
         
         try:
-            follow_button = self.driver.find_elements_by_xpath("//button[contains(text(), 'Follow')]")[0]
+            follow_button = self.driver.find_elements_by_xpath("//div[contains(text(), 'Follow')]")[0]
             follow_button.click()
         except:
             pass
@@ -210,7 +213,7 @@ def weather_bot(city, label, label0, label1, label2, label3, label4):
     label['text'], label0['text'], label1['text'], label2['text'], label3['text'], label4['text'] = weather_bot.get_weather(city)
 
 
-def instagram_bot(operation, hashtag, user, username_entry_text, password_entry_text):
+def instagram_bot(operation, user, username_entry_text, password_entry_text):
     instagram_bot = web_scraper()
     username = str(username_entry_text)
     password = str(password_entry_text)
@@ -426,7 +429,7 @@ class weather_screen():
         #button for weather entry
         #I only want its command to run once, when it's clicked so I made a 
         #simple lambda function that invokes the weather_bot function
-        self.button = tk.Button(self.weather_frame, text="Get Weather", font=('Courier', 40), bg='white', 
+        self.button = tk.Button(self.weather_frame, text="Get Weather", font=('Courier', 32), bg='white', 
             command=lambda:weather_bot(self.entry.get(), label, label0, label1, label2, label3, label4))
         self.button.place(relx=0.7, relheight=1, relwidth=0.3)
 
@@ -515,7 +518,7 @@ class instagram_screen():
         self.navigate_pic_label.place(relwidth=0.1, relheight=1, relx=0.8)
 
         self.navigate_pic_button = tk.Button(self.user_frame, image=self.navigate_pic, 
-        command=lambda: instagram_bot('nav_user', '', str(user.get()), username_entry.get(), password_entry.get()))
+        command=lambda: instagram_bot('nav_user', str(user.get()), username_entry.get(), password_entry.get()))
         self.navigate_pic_button.place(relwidth=0.1, relheight=1, relx=0.8)
 
 
@@ -525,7 +528,7 @@ class instagram_screen():
         self.follow_pic_label.place(relwidth=0.1, relheight=1, relx=0.9)
 
         self.follow_pic_button = tk.Button(self.user_frame, image=self.follow_pic, 
-        command=lambda: instagram_bot('follow_user', '', str(user.get()), username_entry.get(), password_entry.get()))
+        command=lambda: instagram_bot('follow_user', str(user.get()), username_entry.get(), password_entry.get()))
         self.follow_pic_button.place(relwidth=0.1, relheight=1, relx=0.9)
 
 if __name__ == '__main__':
